@@ -76,5 +76,12 @@ function main() {
   themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
 }
 
-// 启动
-main();
+// --- 启动 ---
+// 确保在DOM加载完成后再执行脚本，以避免 document.body 为 null 的情况
+if (document.readyState === 'loading') {
+    log('log', 'DOM a carregar, a adicionar o ouvinte DOMContentLoaded.');
+    document.addEventListener('DOMContentLoaded', main);
+} else {
+    log('log', 'DOM já carregado, executando main() diretamente.');
+    main();
+}

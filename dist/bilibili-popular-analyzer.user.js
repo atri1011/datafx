@@ -337,15 +337,12 @@ async function performAnalysis(rawData, config) {
   let ai_summary = 'AI分析功能未开启或配置错误。';
   if (config.aiApiKey && config.aiApiUrl) {
     try {
-      ai_summary = await getAiAnalysis(aiPrompt, config.aiApiUrl, config.aiApiKey);
+      ai_summary = await getAiAnalysis(aiPrompt, config.aiApieUrl, config.aiApiKey);
     } catch (error) {
       log('error', 'AI分析失败', error);
       ai_summary = `AI分析请求失败: ${error.message}`;
     }
   }
-
-  // TODO: Implement word cloud data generation
-  const word_cloud_data = []; // Placeholder
 
   const result = {
     video_details,
@@ -583,14 +580,23 @@ let shadowRoot = null;
  * @returns {{panel: HTMLElement, containers: object}} 返回面板元素和图表容器
  */
 function createPanel() {
+  log('log', 'A tentar criar o painel de análise...');
   if (document.getElementById('bili-analytics-host')) {
-    log('warn', '分析面板已存在。');
-    return;
+    log('warn', 'O painel de análise já existe.');
+    return { panel: null, containers: null };
   }
 
   const host = document.createElement('div');
   host.id = 'bili-analytics-host';
-  document.body.appendChild(host);
+  
+  if (document.body) {
+    log('log', 'document.body encontrado. A anexar o anfitrião.');
+    document.body.appendChild(host);
+    log('log', 'Anfitrião anexado ao body com sucesso.');
+  } else {
+    log('error', 'document.body não encontrado. O script pode estar a ser executado demasiado cedo.');
+    return { panel: null, containers: null };
+  }
 
   shadowRoot = host.attachShadow({ mode: 'open' });
 
@@ -813,6 +819,13 @@ function main() {
   themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
 }
 
-// 启动
-main();
+// --- 启动 ---
+// 确保在DOM加载完成后再执行脚本，以避免 document.body 为 null 的情况
+if (document.readyState === 'loading') {
+    log('log', 'DOM a carregar, a adicionar o ouvinte DOMContentLoaded.');
+    document.addEventListener('DOMContentLoaded', main);
+} else {
+    log('log', 'DOM já carregado, executando main() diretamente.');
+    main();
+}
 })();

@@ -22,14 +22,23 @@ let shadowRoot = null;
  * @returns {{panel: HTMLElement, containers: object}} 返回面板元素和图表容器
  */
 export function createPanel() {
+  log('log', 'A tentar criar o painel de análise...');
   if (document.getElementById('bili-analytics-host')) {
-    log('warn', '分析面板已存在。');
-    return;
+    log('warn', 'O painel de análise já existe.');
+    return { panel: null, containers: null };
   }
 
   const host = document.createElement('div');
   host.id = 'bili-analytics-host';
-  document.body.appendChild(host);
+  
+  if (document.body) {
+    log('log', 'document.body encontrado. A anexar o anfitrião.');
+    document.body.appendChild(host);
+    log('log', 'Anfitrião anexado ao body com sucesso.');
+  } else {
+    log('error', 'document.body não encontrado. O script pode estar a ser executado demasiado cedo.');
+    return { panel: null, containers: null };
+  }
 
   shadowRoot = host.attachShadow({ mode: 'open' });
 

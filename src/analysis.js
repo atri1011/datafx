@@ -85,15 +85,12 @@ export async function performAnalysis(rawData, config) {
   let ai_summary = 'AI分析功能未开启或配置错误。';
   if (config.aiApiKey && config.aiApiUrl) {
     try {
-      ai_summary = await getAiAnalysis(aiPrompt, config.aiApiUrl, config.aiApiKey);
+      ai_summary = await getAiAnalysis(aiPrompt, config.aiApieUrl, config.aiApiKey);
     } catch (error) {
       log('error', 'AI分析失败', error);
       ai_summary = `AI分析请求失败: ${error.message}`;
     }
   }
-
-  // TODO: Implement word cloud data generation
-  const word_cloud_data = []; // Placeholder
 
   const result = {
     video_details,
