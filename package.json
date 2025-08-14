@@ -1,0 +1,11 @@
+{
+  "name": "bilibili-popular-analyzer",
+  "version": "1.0.0",
+  "description": "B站热门视频AI数据分析油猴脚本",
+  "author": "Kilo Code",
+  "license": "MIT",
+  "scripts": {
+    "build": "node build.js"
+  },
+  "devDependencies": {}
+}

@@ -1,0 +1,59 @@
+/*
+ * @file themes.css
+ * @description 明暗主题适配样式
+ */
+
+/* 
+ * The :host selector allows us to style the Shadow DOM's host element.
+ * We define CSS variables for theming.
+ */
+
+:host {
+  /* Light Theme (default) */
+  --bg-color: #ffffff;
+  --text-color-primary: #181818;
+  --text-color-secondary: #606060;
+  --border-color: #e0e0e0;
+  --header-bg-color: #f9f9f9;
+  --button-bg-color: #f0f0f0;
+  --button-hover-bg-color: #e0e0e0;
+  --button-text-color: #333;
+}
+
+:host(.dark) {
+  /* Dark Theme */
+  --bg-color: #202020;
+  --text-color-primary: #f1f1f1;
+  --text-color-secondary: #aaaaaa;
+  --border-color: #383838;
+  --header-bg-color: #282828;
+  --button-bg-color: #3e3e3e;
+  --button-hover-bg-color: #505050;
+  --button-text-color: #f1f1f1;
+}
+
+/* Apply variables from main.css */
+.bili-analytics-container {
+  background-color: var(--bg-color);
+  color: var(--text-color-primary);
+  border: 1px solid var(--border-color);
+}
+
+.bili-analytics-header {
+  background-color: var(--header-bg-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.bili-analytics-footer {
+  border-top: 1px solid var(--border-color);
+}
+
+.bili-analytics-button {
+  background-color: var(--button-bg-color);
+  color: var(--button-text-color);
+  border: 1px solid var(--border-color);
+}
+
+.bili-analytics-button:hover {
+  background-color: var(--button-hover-bg-color);
+}
