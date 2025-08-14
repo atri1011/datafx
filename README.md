@@ -21,7 +21,7 @@
     *   确保您的浏览器（如 Chrome, Firefox, Edge）已经安装了 [Tampermonkey](https://www.tampermonkey.net/) 扩展。
 
 2.  **安装脚本**:
-    *   (开发中) 点击此处的“安装脚本”链接，Tampermonkey会自动弹出安装页面，点击“安装”即可。
+    *   点击此处的“安装脚本”链接，Tampermonkey会自动弹出安装页面，点击“安装”即可：[从 GitHub 安装](https://github.com/atri1011/datafx/raw/master/dist/bilibili-popular-analyzer.user.js)
 
 3.  **使用**:
     *   访问B站 [热门排行榜](https://www.bilibili.com/v/popular/rank/all) 页面。
